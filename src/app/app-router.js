@@ -2,6 +2,8 @@
  * 路由 懒加载 配置文件 
  */
 import app from '@/app/app-main'
+import companiesCtrl from './components/admin/companies/companies.controller';
+import officesCtrl from './components/admin/offices/offices.controller';
 
 app.config(['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', function ($controllerProvider, $compileProvider, $filterProvider, $provide) {
     // lazy controller, directive and service 
@@ -46,13 +48,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $stateProvider
         .state('/companies', {
             url: '/companies',
-            template: require('@/app/templates/companies.html'),
-            controller: 'appController',
+            template: require('@/app/components/admin/companies/companies.html'),
+            controller: companiesCtrl,
+            controllerAs: '$companies',
+            css: require('@/app/components/admin/companies/companies.css'),
         });
     $stateProvider
         .state('/offices', {
             url: '/offices',
-            template: require('@/app/templates/offices.html'),
-            controller: 'appController',
+            template: require('@/app/components/admin/offices/offices.html'),
+            controller: officesCtrl,
+            controllerAs: '$offices',
+            css: require('@/app/components/admin/offices/offices.css'),
         })
 }])

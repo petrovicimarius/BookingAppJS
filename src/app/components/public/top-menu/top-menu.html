@@ -1,7 +1,7 @@
 <div id="navbar">
     <div class="dropdown">
         <button class="dropdownButton"><i class="fa fa-bars" style="font-size: 30px"></i></button>
-        <div class="dropdown-content">
+        <div ng-if="admin" class="dropdown-content">
             <div class="content">
                 <a [routerLink]="['/offices']" routerLinkActive="isActive">Offices
                 </a>
@@ -19,16 +19,27 @@
                 </a>
             </div>
         </div>
+        <div ng-if="!admin" class="dropdown-content">
+            <div class="content">
+                <a [routerLink]="['/offices']" routerLinkActive="isActive">Companies
+                </a>
+            </div>
+            <div class="content">
+                <a [routerLink]="['/services']" routerLinkActive="isActive">Log in
+                </a>
+            </div>
+        </div>
     </div>
-    <span class="imgP" style="margin-top: 40px;">
+
+    <span class="company-logo">
         <a [routerLink]="['/offices']" class="navbar-brand">
             Booking App
         </a>
-
     </span>
+
     <div id="right">
-        <span class="menuOpt" [hidden]="currentRoute == '/users'">
-            <ul class="pages">
+        <span class="menuOpt">
+            <ul ng-if="admin" class="pages">
                 <a [routerLink]="['/offices']" routerLinkActive="isActive">Offices
                 </a>
                 <a [routerLink]="['/services']" routerLinkActive="isActive">Services
@@ -36,6 +47,12 @@
                 <a [routerLink]="['/bookings']" routerLinkActive="isActive">Bookings
                 </a>
                 <a [routerLink]="['/profile']" routerLinkActive="isActive">Profile
+                </a>
+            </ul>
+            <ul ng-if="!admin" class="pages">
+                <a [routerLink]="['/offices']" routerLinkActive="isActive">Companies
+                </a>
+                <a [routerLink]="['/services']" routerLinkActive="isActive">Log in
                 </a>
             </ul>
         </span>
