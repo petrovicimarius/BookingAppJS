@@ -4,6 +4,10 @@
 import app from '@/app/app-main'
 import companiesCtrl from './components/admin/companies/companies.controller';
 import officesCtrl from './components/admin/offices/offices.controller';
+import loginCtrl from './components/public/login/login.controller';
+import servicesCtrl from './components/admin/services/services.controller';
+import bookingsCtrl from './components/admin/bookings/bookings.controller';
+import profileCtrl from './components/admin/profile/profile.controller';
 
 app.config(['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', function ($controllerProvider, $compileProvider, $filterProvider, $provide) {
     // lazy controller, directive and service 
@@ -42,7 +46,7 @@ resolve: {
     }]
 }
  */
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('');
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -61,4 +65,36 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             controllerAs: '$offices',
             css: require('@/app/components/admin/offices/offices.css'),
         })
+    $stateProvider
+        .state('/login', {
+            url: '/login',
+            template: require('@/app/components/public/login/login.html'),
+            controller: loginCtrl,
+            controllerAs: '$login',
+            css: require('@/app/components/public/login/login.css'),
+        })
+    $stateProvider
+        .state('/services', {
+            url: '/services',
+            template: require('@/app/components/admin/services/services.html'),
+            controller: servicesCtrl,
+            controllerAs: '$services',
+            css: require('@/app/components/admin/services/services.css'),
+        })
+    $stateProvider
+        .state('/bookings', {
+            url: '/bookings',
+            template: require('@/app/components/admin/bookings/bookings.html'),
+            controller: bookingsCtrl,
+            controllerAs: '$bookings',
+            css: require('@/app/components/admin/bookings/bookings.css'),
+        })
+    $stateProvider.state('/profile', {
+        url: '/profile',
+        template: require('@/app/components/admin/profile/profile.html'),
+        controller: profileCtrl,
+        controllerAs: '$profile',
+        css: require('@/app/components/admin/profile/profile.css'),
+    })
+
 }])

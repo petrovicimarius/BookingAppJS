@@ -1,15 +1,15 @@
 <div class="companiesList">
     <div class="rectangle">
-        <div class="company">
+        <div class="company" ng-repeat="company in $companies.companiesList">
             <div class="logo">
                 <img class="img" src="./../../../../assets/default-company.png">
             </div>
             <div class="companyInfo">
                 <div class="companyName">
-                    <p>Company name</p>
+                    <p>{{company.name}}</p>
                 </div>
                 <div class=" companyDesc">
-                    <p>Company description</p>
+                    <p>{{company.description}}</p>
                 </div>
                 <div>
                     <button type="button" class="selectCompany"

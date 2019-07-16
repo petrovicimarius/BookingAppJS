@@ -1,0 +1,167 @@
+<div class="login-page">
+    <div class="container content" *ngIf="loginContent">
+        <div class="container-login">
+            <div class="container-banner">
+                <img class="banner" src="./../../../../assets/booking.png">
+            </div>
+            <form #login="ngForm">
+                <div class="sign-in">
+                    <span class="help-block" style="color: black"> {{message}}</span>
+                    <span class="error-message-pass" *ngIf="password_message" style="color: red"><i
+                            class="fa fa-exclamation-triangle">{{password_message }}</i></span>
+                    <p class="input-info">Email adress</p>
+                    <div class="container-email">
+                        <input type="email" name="email_log" id="email_log" class="email" required email
+                            pattern="[a-zA-Z0-9.-_]{2,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+                    </div>
+                    <div class="error-email">
+                        <span class="error-message fa fa-exclamation-triangle" *ngIf="!email.valid && email.touched ">
+                            Please enter a
+                            valid email format!</span>
+                    </div>
+
+                    <p class="input-info">Password</p>
+
+                    <div class="display-eye">
+                        <input type="{{showHide ? 'password' : 'text'}}" name="password_log" id="password_log"
+                            class="password" [(ngModel)]="company.password" required pattern=".{4,}"
+                            #passwordlogin="ngModel">
+                        <div class="eye-button">
+                            <button type="button" (mousedown)="showMyPass()" class="show-password">
+                                <i class="fa {{ showHide ? 'fa-eye-slash' : 'fa-eye'}} style-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="error-message  fa fa-exclamation-triangle"
+                            *ngIf="! passwordlogin.valid &&  passwordlogin.touched ">Please
+                            enter at least one: upper-case leter, number, special caracters and minlength 8.</span>
+                    </div>
+
+                    <div class="container-sign-in">
+                        <button type="submit" class="sign-btn" [disabled]="!login.valid"><span>LOGIN</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container-forgot">
+            <p class="forgot">Forgot password?
+                <a (click)="manageForms(false, false, true)">Reset it</a>
+            </p>
+        </div>
+
+        <div class="container-sign-up">
+            <p class="text-account">Don't have an account?</p>
+            <button type="submit" class="sign-up" (click)="manageForms(false,true, false)">Sign up</button>
+        </div>
+    </div>
+
+
+
+    <!-- <div class="container content" *ngIf="resetContent">
+
+        <div class="row">
+            <div class="col-md-12">
+                <img class="banner" src="./assets/booking.png">
+                <form (ngSubmit)="resetPassword()" #reset="ngForm">
+                    <div class="col-md-7">
+                        <p class="input-info">Email adress</p>
+                        <div>
+                            <input type="email" name="email_reset" id="email_reset" class="email"
+                                [(ngModel)]="company.email" required email
+                                pattern="[a-zA-Z0-9.-_]{2,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #email_reset="ngModel"
+                                style="margin-bottom: 5px;">
+                        </div>
+                        <div class="error-email">
+                            <span class="error-message  fa fa-exclamation-triangle"
+                                *ngIf="!email_reset.valid && email_reset.touched ">Please
+                                enter a valid email format!</span>
+                        </div>
+                        <div class="resetBtn">
+                            <button type="submit" class="sign-btn" [disabled]="!reset.valid">RESET PASSWORD</button>
+                        </div>
+                        <div class="row">
+                            <div class="display_terms">
+                                <input type="checkbox" name="agree" id="agree" class="agree" ngModel required>
+                                <label class="terms">I agree with Terms & Conditions</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="toLogin">
+            <p class="text-account">You don't want to reset password?</p>
+            <button type="submit" class="sign-up" (click)="manageForms(true,false,false)">Login</button>
+        </div>
+    </div>
+
+
+
+    <div class="container content" *ngIf="registerContent">
+
+        <div class="row">
+            <div class="col-md-12">
+                <img class="banner" src="./assets/booking.png">
+                <form (ngSubmit)="registerUser()" #create="ngForm">
+                    <div class="col-md-7">
+                        <span class="help-block" style="color: black"> {{message}}</span>
+                        <p class="input-info">Your name</p>
+                        <div>
+                            <input type="text" name="first_name" id="first_name" class="email"
+                                [(ngModel)]="company.name" required #first_name="ngModel" pattern="[a-zA-Z ]*">
+                        </div>
+                        <div class="error-email">
+                            <span class="error-message  fa fa-exclamation-triangle"
+                                *ngIf="!first_name.valid && first_name.touched ">Your
+                                name must contain only characters!</span>
+                        </div>
+                        <p class="input-info">Email adress</p>
+                        <div>
+                            <input type="email" name="email_register" id="email_register" class="email"
+                                [(ngModel)]="company.email" required #email_register="ngModel" email
+                                pattern="[a-zA-Z0-9.-_]{2,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+
+                        </div>
+                        <div class="error-email">
+                            <span class="error-message  fa fa-exclamation-triangle"
+                                *ngIf="!email_register.valid && email_register.touched ">Please
+                                enter a valid email format!</span>
+                        </div>
+                        <p class="input-info">Password</p>
+                        <div class="display-eye">
+                            <input type="{{showHide ? 'password' : 'text'}}" name="password_register"
+                                id="password_register" class="password" [(ngModel)]="company.password" required
+                                pattern=".{4,}" #password_register="ngModel">
+                            <button type="button" (click)="showMyPass()" class="show-password">
+                                <i class="fa {{ showHide ? 'fa-eye-slash' : 'fa-eye'}} style-eye"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <span class="error-message-pass  fa fa-exclamation-triangle"
+                                *ngIf="!password_register.valid &&  password_register.touched ">Please
+                                enter at least one: upper-case leter, number, special caracters and minlength 8.</span>
+                        </div>
+
+                        <div class="createAccount">
+                            <button type="submit" class="sign-btn" [disabled]="!create.valid">CREATE ACCOUNT</button>
+                        </div>
+                        <div class="row">
+                            <div class="display_terms">
+                                <input type="checkbox" name="agree_terms" id="agree_terms" class="agree" ngModel
+                                    required>
+                                <label class="terms">I agree with Terms & Conditions</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div> -->
+    <!-- <div class="toLogin">
+        <p class="text-account">You have already an account?</p>
+        <button type="submit" class="sign-up" (click)="manageForms(true,false,false)">Login</button>
+    </div> -->
+</div>
