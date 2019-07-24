@@ -4,56 +4,106 @@
             <div class="container-banner">
                 <img class="banner" src="./../../../../assets/booking.png">
             </div>
-            <form #login="ngForm">
+            <form name="loginForm">
                 <div class="sign-in">
-                    <span class="help-block" style="color: black"> {{message}}</span>
-                    <span class="error-message-pass" *ngIf="password_message" style="color: red"><i
-                            class="fa fa-exclamation-triangle">{{password_message }}</i></span>
+                    <div class="messages">
+                        <span class="error-message-pass" ng-if="$login.error" style="color: red"><i
+                                class="fa fa-exclamation-triangle">Something went wrong on {{message}}! <br> Please
+                                try again!</i>
+                        </span>
+
+                        <span class="error-message-pass" ng-if="$login.success" style="color: green">
+                            <i class="fa fa-check-circle">You {{message}}ed successfully! <br> Now <a
+                                    ng-click="$login.changeType('Login')">log in</a>!</i>
+                        </span>
+                    </div>
 
                     <div ng-if="$login.state == 'Register'">
-                        <p class="input-info">Name</p>
+                        <p class="input-info">First name</p>
+
                         <div class="container-name">
-                            <input type="text" name="name_log" id="name_log" class="name"
-                                ng-model="$login.userData.name" required name minlength="2">
+                            <input type="text" name="first_name" id="first_name" class="name"
+                                ng-model="$login.userData.first_name" required minlength="2">
                         </div>
-                        <div class="error-name">
-                            <span class="error-message fa fa-exclamation-triangle" ng-if="!name.valid && name.touched ">
-                                Please enter a
-                                valid name!</span>
+
+                        <div class="error_message">
+                            <i ng-show="loginForm.first_name.$touched && loginForm.first_name.$error.required"
+                                class="fa fa-exclamation-triangle">
+                                Please enter your first name!
+                            </i>
+
+                            <i ng-show="loginForm.first_name.$touched && loginForm.first_name.$error.minlength"
+                                class="fa fa-exclamation-triangle">
+                                Yout first name is too short!
+                            </i>
+                        </div>
+                    </div>
+
+                    <div ng-if="$login.state == 'Register'">
+                        <p class="input-info">Last name</p>
+
+                        <div class="container-name">
+                            <input type="text" name="last_name" id="last_name" class="name"
+                                ng-model="$login.userData.last_name" required name minlength="2">
+                        </div>
+
+                        <div class="error_message">
+                            <i ng-show="loginForm.last_name.$touched && loginForm.last_name.$error.required"
+                                class="fa fa-exclamation-triangle">
+                                Please enter your last name!
+                            </i>
+
+                            <i ng-show="loginForm.last_name.$touched && loginForm.last_name.$error.minlength"
+                                class="fa fa-exclamation-triangle">
+                                Yout last name is too short!
+                            </i>
                         </div>
                     </div>
 
                     <p class="input-info">Email adress</p>
+
                     <div class="container-email">
-                        <input type="email" name="email_log" id="email_log" class="email"
-                            ng-model="$login.userData.email" required email
-                            pattern="[a-zA-Z0-9.-_]{2,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+                        <input type="email" name="email" id="email" class="email" ng-model="$login.userData.email"
+                            required pattern="[a-zA-Z0-9.-_]{2,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
                     </div>
-                    <div class="error-email">
-                        <span class="error-message fa fa-exclamation-triangle" ng-if="!email.valid && email.touched ">
-                            Please enter a
-                            valid email format!</span>
+
+                    <div class="error_message">
+                        <i ng-show="loginForm.email.$touched && loginForm.email.$error.required"
+                            class="fa fa-exclamation-triangle">
+                            Please enter your email!
+                        </i>
+
+                        <i ng-show="loginForm.email.$touched && loginForm.email.$error.pattern"
+                            class="fa fa-exclamation-triangle">
+                            Please enter a valid email format! <br> (Ex: email@email.com)
+                        </i>
                     </div>
 
                     <div ng-if="$login.state == 'Register' || $login.state == 'Login'">
                         <p class="input-info">Password</p>
 
                         <div class="display-eye">
-                            <input type="{{ $login.showPass ? 'text' : 'password'}}" name="password_log"
-                                id="password_log" class="password" ng-model="$login.userData.password" required
-                                pattern=".{4,}">
+                            <input type="{{ $login.showPass ? 'text' : 'password'}}" name="password" id="password"
+                                class="password" ng-model="$login.userData.password" required pattern=".{4,}">
+
                             <div class="eye-button">
                                 <button type="button" ng-click="$login.showMyPass()" class="show-password">
                                     <i class="fa {{ $login.showPass ? 'fa-eye' : 'fa-eye-slash'}} style-eye"></i>
                                 </button>
                             </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <span class="error-message  fa fa-exclamation-triangle"
-                            *ngIf="! passwordlogin.valid &&  passwordlogin.touched ">Please
-                            enter at least one: upper-case leter, number, special caracters and minlength 8.</span>
+                        <div class="error_message">
+                            <i ng-show="loginForm.password.$touched && loginForm.password.$error.required"
+                                class="fa fa-exclamation-triangle">
+                                Please enter your password!
+                            </i>
+
+                            <i ng-show="loginForm.password.$touched && loginForm.password.$error.pattern"
+                                class="fa fa-exclamation-triangle">
+                                Your password needs to have at least 4 characters!
+                            </i>
+                        </div>
                     </div>
 
                     <div class="container-sign-in">
@@ -72,6 +122,7 @@
 
         <div class="container-sign-up" ng-if="$login.state != 'Login'">
             <p class="text-account">Already have an account?</p>
+
             <button type="submit" class="sign-up" ng-click="$login.changeType('Login')">Login</button>
         </div>
 
@@ -83,6 +134,7 @@
 
         <div class="container-sign-up" ng-if="$login.state != 'Register'">
             <p class="text-account">Don't have an account?</p>
+
             <button type="submit" class="sign-up" ng-click="$login.changeType('Register')">Sign up</button>
         </div>
     </div>

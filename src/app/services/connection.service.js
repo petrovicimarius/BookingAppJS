@@ -15,4 +15,19 @@ export default class ConnectionService {
         var _this = this;
         return _this.$http.get(path, httpOptions);
     }
+
+    post(path, data) {
+        var _this = this;
+        return _this.$http.post(path, data, httpOptions);
+    }
+
+    put(path, data) {
+        var _this = this;
+        return _this.$http.put(path, data, httpOptions);
+    }
+
+    delete(path, data) {
+        var _this = this;
+        return _this.$http.delete(path, data, httpOptions);
+    }
 }
