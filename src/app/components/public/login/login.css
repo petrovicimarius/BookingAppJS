@@ -28,7 +28,8 @@
 }
 
 .display-eye,
-.container-email {
+.container-email,
+.container-name {
     display: flex;
     width: 100%;
 }
@@ -96,7 +97,6 @@
     font-weight: bold;
     line-height: 11px;
     text-align: center;
-    width: 85px;
     height: 50px;
     margin: 0 auto;
     display: flex;
@@ -105,16 +105,19 @@
 .container-forgot {
     margin: 0 auto;
     max-width: 250px;
+    height: 50px;
 }
 
 .text-account {
     font-size: 18px;
     color: black;
     margin: 0 auto;
-    width: 175px;
+    max-width: 300px;
+    text-align: center;
 }
 
-.email {
+.email,
+.name {
     height: 50px;
     border: 1px solid #aeb5bb;
     border-radius: 5px;

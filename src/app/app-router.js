@@ -59,7 +59,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         });
     $stateProvider
         .state('/offices', {
-            url: '/offices',
+            url: '/offices/:id',
             template: require('@/app/components/admin/offices/offices.html'),
             controller: officesCtrl,
             controllerAs: '$offices',
@@ -75,7 +75,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         })
     $stateProvider
         .state('/services', {
-            url: '/services',
+            url: '/services/:id',
             template: require('@/app/components/admin/services/services.html'),
             controller: servicesCtrl,
             controllerAs: '$services',

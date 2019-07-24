@@ -1,10 +1,18 @@
+const httpOptions = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "x-access-token": localStorage.getItem("token") ?
+        localStorage.getItem("token") : ""
+};
+
 export default class ConnectionService {
 
     constructor($http) {
         this.$http = $http;
     }
 
-    getRequest(path) {
-        return this.$http.get(path);
+    get(path) {
+        var _this = this;
+        return _this.$http.get(path, httpOptions);
     }
 }

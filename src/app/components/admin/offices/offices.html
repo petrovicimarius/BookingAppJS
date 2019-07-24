@@ -1,3 +1,29 @@
-<div>
-    Offices works!
+<div class="offices-page">
+    <div class="officeList" ng-repeat="office in $offices.officesList">
+        <div class="office">
+            <div class="officeName">
+                <p>{{office.name}}</p>
+            </div>
+            <div class="officeDesc">
+                <p>{{office.description}}</p>
+            </div>
+            <div class="officeInfo">
+                <div class="address">
+                    <span>{{office.address}}</span>
+                    <p>Adress</p>
+                </div>
+                <div class="office-email">
+                    <span>{{office.email}}</span>
+                    <p>Email</p>
+                </div>
+                <div class="phone">
+                    <span>{{office.phone}}</span>
+                    <p>Phone</p>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="selectOffice" ng-click="$offices.goToServices(office.id)">SELECT</button>
+            </div>
+        </div>
+    </div>
 </div>

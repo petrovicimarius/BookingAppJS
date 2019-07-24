@@ -1,47 +1,33 @@
+import {
+    log
+} from "util";
+
 export default class companiesCtrl {
 
-    constructor($http, $scope, ConnectionService) {
+    constructor($http, $scope, ConnectionService, environment, $location) {
         this.$http = $http;
         this.$scope = $scope;
+        this._env = environment.environment;
+        this.$location = $location;
         this._service = ConnectionService;
-        this.companiesList = [{
-                id: 1,
-                name: 'ING',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-
-            },
-            {
-                id: 2,
-                name: 'BCR',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-
-            },
-            {
-                id: 3,
-                name: 'BRD',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-
-            },
-            {
-                id: 4,
-                name: 'UniCredit',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-
-            },
-            {
-                id: 5,
-                name: 'BT',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-
-            }
-        ]
+        this.officesList = [];
+        this.companiesList = [];
     }
 
     $onInit() {
+        var _this = this;
+        _this._service.get(`${_this._env.base}${_this._env.company}`).then(res => {
+            _this.companiesList = res.data.companies;
+            console.log(res.data.companies);
+
+        }, err => {
+            console.error(err);
+        });
 
     }
 
-    goToOffices(company) {
-
+    goToOffices(id) {
+        var _this = this;
+        _this.$location.path('/offices/' + id);
     }
 }

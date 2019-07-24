@@ -1,0 +1,121 @@
+.offices-page {
+    padding: 0 0 50px 0;
+}
+
+.office {
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding-left: 30px;
+    background: white;
+    outline: none;
+    border: 2px solid #ffe6ff;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.officeList {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.officeInfo {
+    display: flex;
+}
+
+.officeInfo p {
+    color: grey;
+}
+
+.address,
+.office-email,
+.phone {
+    width: 33%;
+    text-align: center;
+}
+
+.officeName p,
+.officeDesc p {
+    font-size: 25px;
+}
+
+.selectOffice {
+    width: 40%;
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    color: white;
+    background: #d966ff;
+    font-size: 20px;
+    padding-top: 5px;
+    margin-bottom: 20px;
+}
+
+.selectOffice:hover {
+    background: #ffccff;
+}
+
+.company {
+    max-width: 780px;
+    margin: 0 auto;
+    outline: none;
+    display: flex;
+    padding-top: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid lightgrey;
+}
+
+.logo {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.companyName {
+    font-size: 23px;
+    padding-right: 10px;
+}
+
+.companyName p {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.companyDesc {
+    font-size: 17px;
+    padding-right: 10px;
+}
+
+.companyInfo {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+    .company {
+        display: block;
+        text-align: center;
+    }
+
+    .office {
+        padding: 0;
+    }
+
+    .officeInfo {
+        display: block;
+        text-align: center;
+    }
+
+    .address,
+    .office-email,
+    .phone {
+        width: 100%;
+    }
+}

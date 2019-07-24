@@ -2,7 +2,8 @@
     <div class="rectangle">
         <div class="company" ng-repeat="company in $companies.companiesList">
             <div class="logo">
-                <img class="img" src="./../../../../assets/default-company.png">
+                <img class="img"
+                    src="{{ company.image_url ? company.image_url : './../../../../assets/default-company.png'}}">
             </div>
             <div class="companyInfo">
                 <div class="companyName">
@@ -13,7 +14,7 @@
                 </div>
                 <div>
                     <button type="button" class="selectCompany"
-                        ng-click="$companies.goToOffices('company')">SELECT</button>
+                        ng-click="$companies.goToOffices(company._id, company.name)">SELECT</button>
                 </div>
             </div>
         </div>
