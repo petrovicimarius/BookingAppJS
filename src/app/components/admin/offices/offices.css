@@ -32,6 +32,7 @@
 .phone {
     width: 33%;
     text-align: center;
+    border: none !important;
 }
 
 .officeName p,

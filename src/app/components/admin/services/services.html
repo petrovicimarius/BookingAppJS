@@ -2,29 +2,29 @@
     <div class="officeHead">
         <div class="office">
             <div class="officeName">
-                <p>{{office.name}}</p>
+                <p>{{$services.office.name}}</p>
             </div>
             <div class="officeDesc">
-                <p>{{office.description}}</p>
+                <p>{{$services.office.description}}</p>
             </div>
             <div class="officeInfo">
                 <div class="officeAddress">
-                    <span>{{office.address}}</span>
+                    <span>{{$services.office.address}}</span>
                     <p>Adress</p>
                 </div>
                 <div class="officeEmail">
-                    <span>{{office.email}}</span>
+                    <span>{{$services.office.email}}</span>
                     <p>Email</p>
                 </div>
                 <div class="officePhone">
-                    <span>{{office.phone}}</span>
+                    <span>{{$services.office.phone}}</span>
                     <p>Phone</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="serviceList" *ngFor="let service of servicesList">
+    <div class="serviceList" ng-repeat="service in $services.servicesList">
         <div class="rectangle">
             <div class="service">
                 <div class="serviceName">
@@ -48,103 +48,130 @@
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="bookNow" (click)="toggleBook(service)">BOOK NOW</button>
+                    <button type="button" class="bookNow" ng-click="$services.toggleBook(service)">BOOK NOW</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal" ng-if="bookEnabled">
-        <form class="booking" (ngSubmit)="addBooking()" #bookingForm="ngForm">
+    <div class="modal" ng-if="$services.bookEnabled">
+        <form ng-submit="$services.sendBooking()" class="booking" name="bookingForm">
             <div style="float:right;">
-                <button type="button" class="close" (click)="toggleUndo()">x</button>
+                <button type="button" class="close" ng-click="$services.toggleUndo()">x</button>
             </div>
             <div class="header">
-                <h1>Make your booking</h1>
+                <h1>Make your booking for {{$services.selectedService.name}}</h1>
                 <p>PERSONAL DETAILS</p>
             </div>
-            <div class="formular">
+            <div class="booking-formular">
                 <div class="firstDiv">
                     <div class="inputDesign">
                         <p>First name</p>
-                        <input type="text" class="name" name="first_name" [(ngModel)]="booking.first_name" required
-                            #first_name="ngModel">
+                        <input type="text" class="booking-name" name="first_name"
+                            ng-model="$services.booking.first_name" ng-minlength="2" required>
                         <div class="error_message">
-                            <i class="fa fa-exclamation-triangle" *ngIf="! first_name.valid && first_name.touched">
-                                Please enter a valid
-                                first name format!
+                            <i ng-show="bookingForm.first_name.$touched && bookingForm.first_name.$error.required"
+                                class="fa fa-exclamation-triangle">
+                                Please enter your first name!
                             </i>
-                        </div>
-                    </div>
-                    <div class="inputDesign">
-                        <p>Last name</p>
-                        <input type="text" class="name" name="last_name" [(ngModel)]="booking.last_name" required
-                            #last_name="ngModel">
-                        <div class="error_message">
-                            <i class="fa fa-exclamation-triangle" *ngIf="! last_name.valid && last_name.touched"> Please
-                                enter a valid
-                                last name format!
+                            <i ng-show="bookingForm.first_name.$touched && bookingForm.first_name.$error.minlength"
+                                class="fa fa-exclamation-triangle">
+                                Yout first name is too short!
                             </i>
                         </div>
                     </div>
 
+                    <div class="inputDesign">
+                        <p>Last name</p>
+                        <input type="text" class="booking-name" name="last_name" ng-model="$services.booking.last_name"
+                            ng-minlength="2" required>
+                        <div class="error_message">
+                            <i ng-show="bookingForm.last_name.$touched && bookingForm.last_name.$error.required"
+                                class="fa fa-exclamation-triangle">
+                                Please enter your last name!
+                            </i>
+                            <i ng-show="bookingForm.last_name.$touched && bookingForm.last_name.$error.minlength"
+                                class="fa fa-exclamation-triangle">
+                                Yout last name is too short!
+                            </i>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="secondDiv">
                     <div class="inputDesign">
                         <p>Phone</p>
-                        <input type="text" class="phone" name="phone" [(ngModel)]="booking.phone" required
-                            #phone="ngModel">
+                        <input type="number" class="booking-phone" name="phone" ng-model="$services.booking.phone"
+                            required minlength="10" maxlength="12" required="number">
                         <div class="error_message">
-                            <i class="fa fa-exclamation-triangle" *ngIf="! phone.valid && phone.touched"> Please enter a
-                                valid phone format!
+                            <i ng-show="bookingForm.phone.$touched && bookingForm.phone.$error.required"
+                                class="fa fa-exclamation-triangle">
+                                Please enter your phone!
+                            </i>
+                            <i ng-show="bookingForm.phone.$touched && (bookingForm.phone.$error.minlength || bookingForm.phone.$error.maxlength)"
+                                class="fa fa-exclamation-triangle">
+                                Your number is incorrect!
                             </i>
                         </div>
                     </div>
+
                     <div class="inputDesign">
                         <p>Email</p>
-                        <input type="text" class="email" name="email" [(ngModel)]="booking.email" required
-                            #email="ngModel">
+                        <input type="email" class="booking-email" name="email" ng-model="$services.booking.email"
+                            required required="email">
                         <div class="error_message">
-                            <i class="fa fa-exclamation-triangle" *ngIf="! email.valid && email.touched"> Please enter a
-                                valid email format!
+                            <i ng-show="bookingForm.email.$touched && bookingForm.email.$error.required"
+                                class="fa fa-exclamation-triangle">
+                                Please enter your email!
+                            </i>
+                            <i ng-show="bookingForm.email.$touched && bookingForm.email.$error.email"
+                                class="fa fa-exclamation-triangle">
+                                Your email is invalid!
                             </i>
                         </div>
                     </div>
                 </div>
+
                 <div class="thirdDiv">
                     <div class="inputDesign">
                         <p>Address</p>
-                        <input type="text" class="address" name="address" [(ngModel)]="booking.address" required
-                            #address="ngModel">
+                        <input type="text" class="booking-address" name="address" ng-model="$services.booking.address"
+                            required>
                         <div class="error_message">
-                            <i class="fa fa-exclamation-triangle" *ngIf="! address.valid && address.touched"> Please
-                                enter a valid address
-                                format!
+                            <i ng-show="bookingForm.address.$touched && bookingForm.address.$error.required"
+                                class="fa fa-exclamation-triangle">
+                                Please enter your address!
                             </i>
                         </div>
                     </div>
+
                     <div class="inputDesign">
                         <p>Date</p>
-                        <input class="date" type="date" name="date" [min]="today" [(ngModel)]="booking.time" required
-                            #date="ngModel">
+                        <input class="booking-date" type="date" name="date" ng-model="$services.booking.date"
+                            min="{{$services.today}}" required="date" min="{{$services.today}}">
                         <div class="error_message">
-                            <i class="fa fa-exclamation-triangle" *ngIf="! date.valid && date.touched"> Please choose
-                                the date!
+                            <i ng-show="bookingForm.date.$touched && bookingForm.date.$error.required"
+                                class="fa fa-exclamation-triangle">
+                                Please select a date!
+                            </i>
+                            <i ng-show="bookingForm.date.$touched && bookingForm.date.$error.min"
+                                class="fa fa-exclamation-triangle">
+                                Please select a valid date!
                             </i>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="next_button">
-                <button type="submit" class="next" [disabled]="!bookingForm.valid">SEND BOOKING</button>
+                <button type="submit" ng-disabled="!bookingForm" class="next">SEND BOOKING</button>
             </div>
         </form>
     </div>
-    <div class="modal" ng-if="sendEnabled">
+    <div class="modal" ng-if="$services.sendEnabled">
         <div class="sendBooking">
             <div style="float:right;">
-                <button type="button" class="close" (click)="toggleUndo()">x</button>
+                <button type="button" class="close" ng-click="$services.toggleUndo()">&times;</button>
             </div>
-            <div class="img">
+            <div class="send-booking">
                 <img src="./assets/sendBooking.png">
             </div>
             <div class="requestSend">
@@ -156,7 +183,7 @@
                     Thank you for using our services!</p>
             </div>
             <div class="buttonSize">
-                <button type="button" class="closeButton" (click)="toggleUndo()">CLOSE</button>
+                <button type="button" class="closeButton" ng-click="$services.toggleUndo()">CLOSE</button>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ import oclazyload from 'oclazyload/dist/ocLazyLoad.min';
 import uiRouter from 'angular-ui-router/release/angular-ui-router.min.js';
 import ConnectionService from './services/connection.service';
 import environment from './../environment';
+import Booking from './components/schemas/booking';
 import TopMenu from './components/public/top-menu/top-menu.controller';
 
 export default angular.module('BookingApp', [oclazyload, uiRouter])
@@ -13,4 +14,5 @@ export default angular.module('BookingApp', [oclazyload, uiRouter])
         css: require('./components/public/top-menu/top-menu.css')
     })
     .service('ConnectionService', ConnectionService)
-    .service('environment', environment);
+    .service('environment', environment)
+    .service('Booking', Booking);
