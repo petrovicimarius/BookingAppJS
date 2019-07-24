@@ -3,7 +3,6 @@
     margin: 0 auto;
     margin-top: 50px;
     background: white;
-    outline: none;
     border: 2px solid #ffe6ff;
     border-radius: 5px;
     text-align: center;
@@ -38,7 +37,6 @@
     width: 40%;
     min-height: 40px;
     border-radius: 5px;
-    outline: none;
     color: white;
     background: #d966ff;
     font-size: 20px;
@@ -58,7 +56,6 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
     padding-top: 100px;
     max-height: calc(100vh - 100px);
@@ -68,7 +65,6 @@
     max-width: 700px;
     margin: 0 auto;
     margin-top: 50px;
-    outline: none;
 }
 
 .officeInfo {
@@ -101,18 +97,20 @@
     background: white;
     padding-bottom: 50px;
     padding-top: 50px;
+
 }
 
 .close {
-    font-size: 15px;
+    font-size: 18px;
     border: none;
     background: transparent;
-    color: grey;
-    outline: none;
+    color: black;
+    cursor: pointer;
 }
 
-.close:hover {
-    color: black;
+.close:hover,
+.close:focus {
+    color: grey;
 }
 
 .header {
@@ -128,9 +126,7 @@
     color: grey;
 }
 
-.formular {}
-
-.formular p {
+.booking-formular p {
     font-size: 20px;
 }
 
@@ -140,18 +136,18 @@
     display: flex;
 }
 
-.name,
-.phone,
-.email,
-.address {
-    width: 97%;
+.booking-name,
+.booking-phone,
+.booking-email,
+.booking-address {
+    max-width: 400px;
+    width: 100%;
     height: 50px;
     border-radius: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 0 10px 0 10px;
     border: 1px solid black;
-    outline: none;
     font-size: 20px;
+    box-sizing: border-box;
 }
 
 .next {
@@ -161,14 +157,15 @@
     font-size: 20px;
     padding-left: 5px;
     padding-right: 5px;
-    outline: none;
     border: none;
     background: #d966ff;
     color: white;
 }
 
 .next:hover,
-.closeButton:hover {
+.closeButton:hover,
+.next:focus,
+.closeButton:focus {
     background: #ffccff;
 }
 
@@ -178,16 +175,16 @@
     padding-top: 25px;
 }
 
-.address:hover,
-.address:focus,
-.date:hover,
-.date:focus,
-.name:hover,
-.name:focus,
-.phone:hover,
-.phone:focus,
-.email:hover,
-.email:focus {
+.booking-address:hover,
+.booking-address:focus,
+.booking-date:hover,
+.booking-date:focus,
+.booking-name:hover,
+.booking-name:focus,
+.booking-phone:hover,
+.booking-phone:focus,
+.booking-email:hover,
+.booking-email:focus {
     border: 1px solid #ffccff;
 }
 
@@ -202,7 +199,7 @@
     padding-bottom: 50px;
 }
 
-.img {
+.send-booking {
     margin: 0 auto;
     max-width: 260px;
 }
@@ -226,7 +223,6 @@
 
 .closeButton {
     border: none;
-    outline: none;
     width: 100%;
     min-height: 50px;
     font-size: 20px;
@@ -256,7 +252,6 @@ input.ng-invalid.ng-touched {
 }
 
 .error_message {
-    width: 97%;
     text-align: center;
     color: red;
 }
@@ -265,18 +260,31 @@ input.ng-invalid.ng-touched {
     background: grey;
 }
 
-.date {
+.booking-date {
     border-radius: 5px;
+    padding: 0 10px 0 10px;
     min-height: 50px;
     width: 100%;
     font-size: 20px;
-    outline: none;
     border: 1px solid black;
+    box-sizing: border-box;
 }
 
 .inputDesign {
-    width: 97%;
+    max-width: 400px;
+    width: 100%;
+}
+
+.firstDiv .inputDesign:last-child,
+.secondDiv .inputDesign:last-child,
+.thirdDiv .inputDesign:last-child {
     padding-left: 30px;
+}
+
+@media only screen and (max-width: 1060px) {
+    .booking {
+        margin: 0 30px 30px 30px;
+    }
 }
 
 @media only screen and (max-width: 700px) {
@@ -301,27 +309,40 @@ input.ng-invalid.ng-touched {
     .price {
         width: 100%;
     }
+
+    .fa {
+        color: red !important;
+    }
 }
 
 @media only screen and (max-width: 800px) {
-    .formular {
+    .booking-formular {
         display: block;
         text-align: center;
+    }
+
+    .firstDiv .inputDesign:last-child,
+    .secondDiv .inputDesign:last-child,
+    .thirdDiv .inputDesign:last-child {
+        padding-left: 0px;
     }
 
     .firstDiv,
     .secondDiv,
     .thirdDiv {
         display: block;
+        margin: 0 auto;
     }
 
     .booking {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 30px;
+        padding-right: 30px;
+        margin: 50px 15px 30px 15px;
     }
 
     .inputDesign {
-        padding: 0;
+        padding-left: 0;
+        margin: 0 auto;
     }
 
     .name,

@@ -78,7 +78,6 @@ li a {
 }
 
 .pages a {
-    line-height: 94px;
     margin-left: 34px;
     padding-top: 13px;
     color: white;
@@ -98,8 +97,6 @@ li a {
     list-style: none;
     display: inline-flex;
     text-decoration: none;
-    outline: none;
-
     height: 80px;
     align-items: center;
     margin-top: 14px;
@@ -107,7 +104,6 @@ li a {
 
 .profile li a {
     text-decoration: none;
-    outline: none;
     margin-right: 20px;
     color: white;
     margin-top: -8px;
@@ -177,7 +173,6 @@ li a {
 
     .dropdownButton {
         background: transparent;
-        outline: none;
         border: none;
     }
 
