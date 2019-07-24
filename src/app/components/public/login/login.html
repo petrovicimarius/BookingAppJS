@@ -8,12 +8,13 @@
                 <div class="sign-in">
                     <div class="messages">
                         <span class="error-message-pass" ng-if="$login.error" style="color: red"><i
-                                class="fa fa-exclamation-triangle">Something went wrong on {{message}}! <br> Please
+                                class="fa fa-exclamation-triangle">Something went wrong on {{$login.message}}! <br>
+                                Please
                                 try again!</i>
                         </span>
 
                         <span class="error-message-pass" ng-if="$login.success" style="color: green">
-                            <i class="fa fa-check-circle">You {{message}}ed successfully! <br> Now <a
+                            <i class="fa fa-check-circle">You {{$login.message}}ed successfully! <br> Now <a
                                     ng-click="$login.changeType('Login')">log in</a>!</i>
                         </span>
                     </div>

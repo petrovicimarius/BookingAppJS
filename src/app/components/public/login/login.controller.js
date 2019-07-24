@@ -16,8 +16,8 @@ export default class loginCtrl {
         this.userData = {
             first_name: '',
             last_name: '',
-            email: '',
-            password: '',
+            email: 'bogdan.rosu+2@assist.ro',
+            password: 'test123',
         }
     }
 
@@ -59,8 +59,7 @@ export default class loginCtrl {
                 console.log('Register: ', _this.userData);
                 _this.message = 'register';
                 data = {
-                    first_name: _this.userData.first_name,
-                    last_name: _this.userData.last_name,
+                    name: _this.userData.first_name + " " + _this.userData.last_name,
                     email: _this.userData.email,
                     password: _this.userData.password
                 }
